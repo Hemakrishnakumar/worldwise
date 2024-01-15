@@ -18,7 +18,7 @@ export default function HomePage() {
           you have wandered the world.
         </h2>
         <Link to="/login" className="cta">
-          Start Touring Now--
+          Start Touring Now
         </Link>
       </section>
     </main>
