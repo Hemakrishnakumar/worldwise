@@ -4,6 +4,7 @@ import { useCities } from "../context/CitiesProvider";
 import { useEffect } from "react";
 import Spinner from "./Spinner";
 import BackButton from "./BackButton";
+import Message from "./Message";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -19,7 +20,9 @@ function City() {
 
   useEffect(() => {
     getCity(id);
-  }, []);
+  }, [id]);
+
+  if (!currentCity.id) return <Message message="There is no such City" />;
 
   if (isLoading) return <Spinner />;
 

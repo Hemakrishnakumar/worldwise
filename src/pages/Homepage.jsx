@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./Homepage.module.css";
 import PageNavigation from "../components/PageNavigation";
 
-export default function Homepage() {
+export default function HomePage() {
   return (
     <main className={styles.homepage}>
       <PageNavigation />
@@ -17,8 +17,8 @@ export default function Homepage() {
           of. Never forget your wonderful experiences, and show your friends how
           you have wandered the world.
         </h2>
-        <Link to="/app" className="cta">
-          Start Touring Now
+        <Link to="/login" className="cta">
+          Start Touring Now--
         </Link>
       </section>
     </main>

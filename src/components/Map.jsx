@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   MapContainer,
   TileLayer,
@@ -13,18 +13,17 @@ import { useEffect, useState } from "react";
 import { useCities } from "../context/CitiesProvider";
 import { useGeolocation } from "../hooks/GeoLocation";
 import Button from "./Button";
+import { useURLPosition } from "../hooks/useURLPosition";
 
 const Map = () => {
   const { cities } = useCities();
   const [mapPosition, setMapPosition] = useState([0.5, 80.6]);
-  const [searchParams] = useSearchParams();
+  const [lat, lng] = useURLPosition();
   const {
     getPosition,
     isLoading: isGeoLocationLoading,
     position: geoLocation,
   } = useGeolocation();
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
 
   useEffect(() => {
     if (lat && lng) setMapPosition([lat, lng]);
@@ -36,12 +35,14 @@ const Map = () => {
 
   return (
     <div className={styles.mapContainer}>
-      <Button type="position" onClick={getPosition}>
-        {isGeoLocationLoading ? "Loading..." : "Get Your Position"}
-      </Button>
+      {geoLocation.lat == mapPosition[0] || (
+        <Button type="position" onClick={getPosition}>
+          {isGeoLocationLoading ? "Loading..." : "Get Your Position"}
+        </Button>
+      )}
       <MapContainer
         center={mapPosition}
-        zoom={10}
+        zoom={12}
         scrollWheelZoom={true}
         className={styles.map}
       >
